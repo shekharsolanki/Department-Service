@@ -62,7 +62,8 @@ public class DepartmentServiceImpl implements DepartmentService {
                 department1.setDepartmentAddress(department.getDepartmentAddress());
             if (Objects.nonNull(department.getDepartmentCode()) && !"".equalsIgnoreCase(department.getDepartmentCode()))
                 department1.setDepartmentCode(department.getDepartmentCode());
+            return departmentRepository.save(department1);
         }
-        return departmentRepository.save(department1);
+        return null;
     }
 }
