@@ -1,7 +1,9 @@
 package in.raghavmadhav.Department.Service.controller;
 
 import in.raghavmadhav.Department.Service.entity.Department;
+import in.raghavmadhav.Department.Service.error.DepartmentNotFoundException;
 import in.raghavmadhav.Department.Service.service.DepartmentService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +19,7 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     @PostMapping("/")
-    public Department addDepartment(@RequestBody Department department) {
+    public Department addDepartment(@Valid @RequestBody Department department) {
         log.info("Inside addDepartment of DepartmentController");
         return departmentService.addDepartment(department);
     }
@@ -29,7 +31,7 @@ public class DepartmentController {
     }
 
     @GetMapping("/{id}")
-    public Department fetchDepartmentById(@PathVariable("id") Long departmentId) {
+    public Department fetchDepartmentById(@PathVariable("id") Long departmentId) throws DepartmentNotFoundException {
         log.info("Inside fetchDepartmentById of DepartmentController");
         return departmentService.findDepartmentById(departmentId);
     }

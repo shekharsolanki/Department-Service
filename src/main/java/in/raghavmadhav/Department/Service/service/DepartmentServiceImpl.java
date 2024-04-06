@@ -1,6 +1,7 @@
 package in.raghavmadhav.Department.Service.service;
 
 import in.raghavmadhav.Department.Service.entity.Department;
+import in.raghavmadhav.Department.Service.error.DepartmentNotFoundException;
 import in.raghavmadhav.Department.Service.repository.DepartmentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -29,9 +31,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department findDepartmentById(Long departmentId) {
+    public Department findDepartmentById(Long departmentId) throws DepartmentNotFoundException {
         log.info("Inside findDepartmentById of DepartmentServiceImpl");
-        return departmentRepository.findById(departmentId).get();
+        Optional<Department> department = departmentRepository.findById(departmentId);
+        if (!department.isPresent())
+            throw new DepartmentNotFoundException("Department not available");
+        return department.get();
     }
 
     @Override
