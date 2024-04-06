@@ -69,7 +69,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department updateDepartmentUsingPatch(Long departmentId, Department department) {
-        log.info("Inside updateDepartmentUsingPut of DepartmentServiceImpl");
+        log.info("Inside updateDepartmentUsingPatch of DepartmentServiceImpl");
 
         Department department1 = null;
         if (departmentRepository.findById(departmentId).isPresent()) {
