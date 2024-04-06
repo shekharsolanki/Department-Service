@@ -53,4 +53,11 @@ public class DepartmentController {
         log.info("Inside updateDepartmentUsingPut of DepartmentController");
         return departmentService.updateDepartmentUsingPut(departmentId, department);
     }
+
+    @PatchMapping("/{id}")
+    public Department updateDepartmentUsingPatch(@PathVariable("id") Long departmentId,
+                                                 @RequestBody Department department) {
+        log.info("Inside updateDepartmentUsingPatch of DepartmentController");
+        return departmentService.updateDepartmentUsingPatch(departmentId, department);
+    }
 }

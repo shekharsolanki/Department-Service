@@ -66,4 +66,24 @@ public class DepartmentServiceImpl implements DepartmentService {
         }
         return null;
     }
+
+    @Override
+    public Department updateDepartmentUsingPatch(Long departmentId, Department department) {
+        log.info("Inside updateDepartmentUsingPut of DepartmentServiceImpl");
+
+        Department department1 = null;
+        if (departmentRepository.findById(departmentId).isPresent()) {
+            department1 = departmentRepository.findById(departmentId).get();
+            if (Objects.nonNull(department.getDepartmentName()) &&
+                    !"".equalsIgnoreCase(department.getDepartmentName()))
+                department1.setDepartmentName(department.getDepartmentName());
+            if (Objects.nonNull(department.getDepartmentAddress()) &&
+                    !"".equalsIgnoreCase(department.getDepartmentAddress()))
+                department1.setDepartmentAddress(department.getDepartmentAddress());
+            if (Objects.nonNull(department.getDepartmentCode()) && !"".equalsIgnoreCase(department.getDepartmentCode()))
+                department1.setDepartmentCode(department.getDepartmentCode());
+            return departmentRepository.save(department1);
+        }
+        return null;
+    }
 }

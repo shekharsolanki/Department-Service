@@ -17,4 +17,6 @@ public interface DepartmentService {
     void deleteDepartmentById(Long departmentId);
 
     Department updateDepartmentUsingPut(Long departmentId, Department department);
+
+    Department updateDepartmentUsingPatch(Long departmentId, Department department);
 }
